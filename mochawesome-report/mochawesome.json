@@ -1,0 +1,158 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-10-21T04:01:41.005Z",
+    "end": "2026-10-21T04:01:42.474Z",
+    "duration": 1469,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fa3eb14b-affd-4ea2-9acc-2f71fc4e8654",
+      "title": "",
+      "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
+      "file": "/testing.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "dea5ca5a-c0b9-4522-aa19-79722f29b7cb",
+          "title": "API Automation Testing - Belajar Bareng",
+          "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
+          "file": "/testing.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "61b6efec-68ef-47af-940b-95de1ea1fda5",
+              "title": "POST /api/login",
+              "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
+              "file": "/testing.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Should successfully login and return JWT token",
+                  "fullTitle": "API Automation Testing - Belajar Bareng POST /api/login Should successfully login and return JWT token",
+                  "timedOut": false,
+                  "duration": 764,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const loginPayload = {\n    username: 'admin',\n    password: 'admin'\n};\nconst response = await request(BASE_URL)\n    .post('/api/login')\n    .set('Content-Type', 'application/json')\n    .send(loginPayload);\n// Assertions\nexpect(response.status).to.equal(200);\n// Assertions Response Body \nexpect(response.body).to.have.property('status', 200);\nexpect(response.body).to.have.property('message', 'Login successful');\nexpect(response.body).to.have.property('token');\nexpect(response.body.token).to.be.a('string').that.is.not.empty;\n// Buat simpan token\nauthToken = response.body.token;",
+                  "err": {},
+                  "uuid": "cef52252-a184-47f4-b556-12bae135cff3",
+                  "parentUUID": "61b6efec-68ef-47af-940b-95de1ea1fda5",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "cef52252-a184-47f4-b556-12bae135cff3"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 764,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            },
+            {
+              "uuid": "4681272f-99eb-4a81-a954-1c7345d49e91",
+              "title": "POST /api/add-user",
+              "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
+              "file": "/testing.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Should successfully add a new user with valid Bearer Token",
+                  "fullTitle": "API Automation Testing - Belajar Bareng POST /api/add-user Should successfully add a new user with valid Bearer Token",
+                  "timedOut": false,
+                  "duration": 699,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "// Cek token\nexpect(authToken).to.be.a('string').that.is.not.empty;\nconst addUserPayload = {\n    username: 'bambangudinpurnomo',\n    age: 23\n};\nconst response = await request(BASE_URL)\n    .post('/api/add-user')\n    .set('Authorization', `Bearer ${authToken}`)\n    .set('Content-Type', 'application/json')\n    .send(addUserPayload);\n// Assertions \nexpect(response.status).to.equal(201);\n// Assertions\nexpect(response.body).to.have.property('status', 201);\nexpect(response.body).to.have.property('username', 'bambangudinpurnomo');\nexpect(response.body).to.have.property('age', 23);\nexpect(response.body).to.have.property('message', 'User successfully added, Hi bambangudinpurnomo!');\nexpect(response.body).to.have.property('userId');",
+                  "err": {},
+                  "uuid": "aceaca7c-878b-4a2e-a6ed-1928e7d81e86",
+                  "parentUUID": "4681272f-99eb-4a81-a954-1c7345d49e91",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "aceaca7c-878b-4a2e-a6ed-1928e7d81e86"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 699,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 10000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "12.0.3"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
