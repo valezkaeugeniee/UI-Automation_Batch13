@@ -55,7 +55,7 @@ describe("Web UI Automation - Belajar Bareng", function () {
     }
     });
 
-  // ---------- Tests ----------
+    // test cases
     it("1. Fitur Login - Berhasil Login dengan Data Valid", async function () {
     await login();
 
@@ -70,18 +70,16 @@ describe("Web UI Automation - Belajar Bareng", function () {
     });
 
     it("2. Fitur Add User - Berhasil Menambahkan User Baru", async function () {
-    // Step 1: Login
     await login();
 
-    // Step 2: Ke halaman Add User
+    // halaman Add User
     const addBtn = await driver.wait(
       until.elementLocated(By.xpath("//button[contains(.,'Add')] | //a[contains(.,'Add')]")),
         10000
     );
     await addBtn.click();
     await driver.wait(until.urlContains("/add"), 10000);
-
-    // Step 3: Isi form dengan data random
+    
     const listNames = ["Alex", "Budi", "Chandra", "David", "Eka", "Fajar", "Gilang", "Indra", "Joko"];
     const randomNamePrefix = listNames[Math.floor(Math.random() * listNames.length)];
     const randomNum = Math.floor(Math.random() * 9000) + 1000;
