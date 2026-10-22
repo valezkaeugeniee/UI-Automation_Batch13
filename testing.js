@@ -64,7 +64,7 @@ describe("Web UI Automation - Belajar Bareng", function () {
         assert.ok(await headerListUsers.isDisplayed(), "Header List Users tidak terlihat");
     });
 
-    // --- TEST CASE 2: ADD USER ---
+    // TEST CASE 2: ADD USER
     it("Fitur Add User - Berhasil Menambahkan User Baru", async function () {
         await login();
 
