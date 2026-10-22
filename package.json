@@ -7,9 +7,11 @@
     "test": "mocha testing.js --reporter mochawesome --timeout 10000"
   },
   "devDependencies": {
-    "chai": "^4.3.10",
+    "chai": "^4.5.0",
+    "chromedriver": "^155.0.2",
     "mocha": "^10.2.0",
     "mochawesome": "^7.1.3",
+    "selenium-webdriver": "^4.51.0",
     "supertest": "^6.3.3"
   }
 }

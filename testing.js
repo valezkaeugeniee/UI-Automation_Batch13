@@ -1,64 +1,97 @@
-const request = require('supertest');
-const expect = require('chai').expect;
+const { Builder, By, until } = require("selenium-webdriver");
+const chrome = require("selenium-webdriver/chrome");
+const assert = require("assert");
+const fs = require("fs");
 
-const BASE_URL = 'https://belajar-bareng.onrender.com';
+describe("Web UI Automation - Belajar Bareng", function () {
+    this.timeout(60000);
+    let driver;
 
-describe('Automation Testing - Belajar Bareng', function () {
-    let authToken = '';
+    async function login(username = "admin", password = "admin") {
+    const usernameInput = await driver.wait(
+        until.elementLocated(By.xpath("//input[@placeholder='Username' or @type='text' or @name='username']")),
+        20000
+    );
+    await usernameInput.sendKeys(username);
 
-// Login
-    describe('POST /api/login', function () {
-        it('Should successfully login and return JWT token', async function () {
-            const loginPayload = {
-                username: 'admin',
-                password: 'admin'
-            };
+    const passwordInput = await driver.findElement(
+        By.xpath("//input[@placeholder='Password' or @type='password' or @name='password']")
+    );
+    await passwordInput.sendKeys(password);
 
-            const response = await request(BASE_URL)
-                .post('/api/login')
-                .set('Content-Type', 'application/json')
-                .send(loginPayload);
+    const signInBtn = await driver.findElement(
+        By.xpath("//button[contains(text(),'Sign in') or contains(text(),'Sing in')]")
+    );
+    await signInBtn.click();
 
-            // Assertions
-            expect(response.status).to.equal(200);
+    await driver.wait(until.urlContains("/users"), 15000);
+    }
 
-            // Assertions Response Body 
-            expect(response.body).to.have.property('status', 200);
-            expect(response.body).to.have.property('message', 'Login successful');
-            expect(response.body).to.have.property('token');
-            expect(response.body.token).to.be.a('string').that.is.not.empty;
+    async function bodyContains(text, timeout = 15000) {
+    const body = await driver.findElement(By.css("body"));
+    await driver.wait(until.elementTextContains(body, text), timeout);
+    }
 
-            // Buat simpan token
-            authToken = response.body.token;
-        });
+    beforeEach(async function () {
+    const options = new chrome.Options();
+
+    driver = await new Builder()
+        .forBrowser("chrome")
+        .setChromeOptions(options)
+        .build();
+
+    await driver.manage().window().maximize();
+    await driver.get("https://belajar-bareng.onrender.com/");
     });
 
-  // Add User
-    describe('POST /api/add-user', function () {
-        it('Should successfully add a new user with valid Bearer Token', async function () {
-            // Cek token
-            expect(authToken).to.be.a('string').that.is.not.empty;
-
-            const addUserPayload = {
-                username: 'bambangudinpurnomo',
-                age: 23
-            };
-
-            const response = await request(BASE_URL)
-                .post('/api/add-user')
-                .set('Authorization', `Bearer ${authToken}`)
-                .set('Content-Type', 'application/json')
-                .send(addUserPayload);
-
-            // Assertions 
-            expect(response.status).to.equal(201);
-
-            // Assertions
-            expect(response.body).to.have.property('status', 201);
-            expect(response.body).to.have.property('username', 'bambangudinpurnomo');
-            expect(response.body).to.have.property('age', 23);
-            expect(response.body).to.have.property('message', 'User successfully added, Hi bambangudinpurnomo!');
-            expect(response.body).to.have.property('userId');
-        });
+    afterEach(async function () {
+    if (driver) {
+        if (this.currentTest.state === "failed") {
+        const img = await driver.takeScreenshot();
+        const name = this.currentTest.title.replace(/[^a-z0-9]/gi, "_");
+        fs.writeFileSync(`fail_${name}.png`, img, "base64");
+        }
+        await driver.quit();
+    }
     });
-});
+
+  // ---------- Tests ----------
+    it("1. Fitur Login - Berhasil Login dengan Data Valid", async function () {
+    await login();
+
+    const currentUrl = await driver.getCurrentUrl();
+    assert.ok(currentUrl.includes("/users"), "URL tidak sesuai setelah login");
+
+    const headerListUsers = await driver.wait(
+        until.elementLocated(By.xpath("//*[contains(., 'List Users')]")),
+        10000
+    );
+    assert.ok(await headerListUsers.isDisplayed(), "Header List Users tidak terlihat");
+    });
+
+    it("2. Fitur Add User - Berhasil Menambahkan User Baru", async function () {
+    // Step 1: Login
+    await login();
+
+    // Step 2: Ke halaman Add User
+    const addBtn = await driver.wait(
+      until.elementLocated(By.xpath("//button[contains(.,'Add')] | //a[contains(.,'Add')]")),
+        10000
+    );
+    await addBtn.click();
+    await driver.wait(until.urlContains("/add"), 10000);
+
+    // Step 3: Isi form dengan data random
+    const listNames = ["Alex", "Budi", "Chandra", "David", "Eka", "Fajar", "Gilang", "Indra", "Joko"];
+    const randomNamePrefix = listNames[Math.floor(Math.random() * listNames.length)];
+    const randomNum = Math.floor(Math.random() * 9000) + 1000;
+    const randomUsername = `${randomNamePrefix}_${randomNum}`;
+    const randomAge = Math.floor(Math.random() * 30) + 18;
+
+    const addUsernameInput = await driver.wait(
+until.elementLocated(By.xpath("//input[@placeholder='Username']")), 10000
+    );
+    await addUsernameInput.sendKeys(randomUsername);
+
+    const ageInput = await driver.findElement(By.xpath("//input[@placeholder='Age']"));
+    await ageInput.sendKeys(randomAge.toString());})})

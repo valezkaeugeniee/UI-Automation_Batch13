@@ -1,13 +1,13 @@
 {
   "stats": {
-    "suites": 3,
+    "suites": 1,
     "tests": 2,
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2026-10-21T04:01:41.005Z",
-    "end": "2026-10-21T04:01:42.474Z",
-    "duration": 1469,
+    "start": "2026-10-22T05:35:06.622Z",
+    "end": "2026-10-22T05:35:16.040Z",
+    "duration": 9418,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "fa3eb14b-affd-4ea2-9acc-2f71fc4e8654",
+      "uuid": "f3f883a2-3336-484a-97c3-b16e23317a5c",
       "title": "",
       "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
       "file": "/testing.js",
@@ -27,101 +27,100 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "dea5ca5a-c0b9-4522-aa19-79722f29b7cb",
-          "title": "API Automation Testing - Belajar Bareng",
+          "uuid": "31c16593-105f-47b3-9364-5aada83e6eeb",
+          "title": "Web UI Automation - Belajar Bareng",
           "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
           "file": "/testing.js",
-          "beforeHooks": [],
-          "afterHooks": [],
-          "tests": [],
-          "suites": [
+          "beforeHooks": [
             {
-              "uuid": "61b6efec-68ef-47af-940b-95de1ea1fda5",
-              "title": "POST /api/login",
-              "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
-              "file": "/testing.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "Should successfully login and return JWT token",
-                  "fullTitle": "API Automation Testing - Belajar Bareng POST /api/login Should successfully login and return JWT token",
-                  "timedOut": false,
-                  "duration": 764,
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "const loginPayload = {\n    username: 'admin',\n    password: 'admin'\n};\nconst response = await request(BASE_URL)\n    .post('/api/login')\n    .set('Content-Type', 'application/json')\n    .send(loginPayload);\n// Assertions\nexpect(response.status).to.equal(200);\n// Assertions Response Body \nexpect(response.body).to.have.property('status', 200);\nexpect(response.body).to.have.property('message', 'Login successful');\nexpect(response.body).to.have.property('token');\nexpect(response.body.token).to.be.a('string').that.is.not.empty;\n// Buat simpan token\nauthToken = response.body.token;",
-                  "err": {},
-                  "uuid": "cef52252-a184-47f4-b556-12bae135cff3",
-                  "parentUUID": "61b6efec-68ef-47af-940b-95de1ea1fda5",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [
-                "cef52252-a184-47f4-b556-12bae135cff3"
-              ],
-              "failures": [],
-              "pending": [],
-              "skipped": [],
-              "duration": 764,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 10000
-            },
-            {
-              "uuid": "4681272f-99eb-4a81-a954-1c7345d49e91",
-              "title": "POST /api/add-user",
-              "fullFile": "/Users/valezkaeu/D/UI-Automation_Batch13/testing.js",
-              "file": "/testing.js",
-              "beforeHooks": [],
-              "afterHooks": [],
-              "tests": [
-                {
-                  "title": "Should successfully add a new user with valid Bearer Token",
-                  "fullTitle": "API Automation Testing - Belajar Bareng POST /api/add-user Should successfully add a new user with valid Bearer Token",
-                  "timedOut": false,
-                  "duration": 699,
-                  "state": "passed",
-                  "speed": "slow",
-                  "pass": true,
-                  "fail": false,
-                  "pending": false,
-                  "context": null,
-                  "code": "// Cek token\nexpect(authToken).to.be.a('string').that.is.not.empty;\nconst addUserPayload = {\n    username: 'bambangudinpurnomo',\n    age: 23\n};\nconst response = await request(BASE_URL)\n    .post('/api/add-user')\n    .set('Authorization', `Bearer ${authToken}`)\n    .set('Content-Type', 'application/json')\n    .send(addUserPayload);\n// Assertions \nexpect(response.status).to.equal(201);\n// Assertions\nexpect(response.body).to.have.property('status', 201);\nexpect(response.body).to.have.property('username', 'bambangudinpurnomo');\nexpect(response.body).to.have.property('age', 23);\nexpect(response.body).to.have.property('message', 'User successfully added, Hi bambangudinpurnomo!');\nexpect(response.body).to.have.property('userId');",
-                  "err": {},
-                  "uuid": "aceaca7c-878b-4a2e-a6ed-1928e7d81e86",
-                  "parentUUID": "4681272f-99eb-4a81-a954-1c7345d49e91",
-                  "isHook": false,
-                  "skipped": false
-                }
-              ],
-              "suites": [],
-              "passes": [
-                "aceaca7c-878b-4a2e-a6ed-1928e7d81e86"
-              ],
-              "failures": [],
-              "pending": [],
-              "skipped": [],
-              "duration": 699,
-              "root": false,
-              "rootEmpty": false,
-              "_timeout": 10000
+              "title": "\"before each\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "fullTitle": "Web UI Automation - Belajar Bareng \"before each\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "timedOut": false,
+              "duration": 3822,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const options = new chrome.Options();\ndriver = await new Builder()\n    .forBrowser(\"chrome\")\n    .setChromeOptions(options)\n    .build();\nawait driver.manage().window().maximize();\nawait driver.get(\"https://belajar-bareng.onrender.com/\");",
+              "err": {},
+              "uuid": "8f868478-7fab-46e5-88b6-2e92bc40e47d",
+              "parentUUID": "31c16593-105f-47b3-9364-5aada83e6eeb",
+              "isHook": true,
+              "skipped": false
             }
           ],
-          "passes": [],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "fullTitle": "Web UI Automation - Belajar Bareng \"after each\" hook in \"Web UI Automation - Belajar Bareng\"",
+              "timedOut": false,
+              "duration": 51,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driver) {\n    if (this.currentTest.state === \"failed\") {\n    const img = await driver.takeScreenshot();\n    const name = this.currentTest.title.replace(/[^a-z0-9]/gi, \"_\");\n    fs.writeFileSync(`fail_${name}.png`, img, \"base64\");\n    }\n    await driver.quit();\n}",
+              "err": {},
+              "uuid": "d1fbc839-f2f8-425f-bfae-4722416969e6",
+              "parentUUID": "31c16593-105f-47b3-9364-5aada83e6eeb",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "1. Fitur Login - Berhasil Login dengan Data Valid",
+              "fullTitle": "Web UI Automation - Belajar Bareng 1. Fitur Login - Berhasil Login dengan Data Valid",
+              "timedOut": false,
+              "duration": 797,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await login();\nconst currentUrl = await driver.getCurrentUrl();\nassert.ok(currentUrl.includes(\"/users\"), \"URL tidak sesuai setelah login\");\nconst headerListUsers = await driver.wait(\n    until.elementLocated(By.xpath(\"//*[contains(., 'List Users')]\")),\n    10000\n);\nassert.ok(await headerListUsers.isDisplayed(), \"Header List Users tidak terlihat\");",
+              "err": {},
+              "uuid": "041da5d8-44d9-4006-9a19-25081f50332a",
+              "parentUUID": "31c16593-105f-47b3-9364-5aada83e6eeb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "2. Fitur Add User - Berhasil Menambahkan User Baru",
+              "fullTitle": "Web UI Automation - Belajar Bareng 2. Fitur Add User - Berhasil Menambahkan User Baru",
+              "timedOut": false,
+              "duration": 1255,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1: Login\nawait login();\n// Step 2: Ke halaman Add User\nconst addBtn = await driver.wait(\n  until.elementLocated(By.xpath(\"//button[contains(.,'Add')] | //a[contains(.,'Add')]\")),\n    10000\n);\nawait addBtn.click();\nawait driver.wait(until.urlContains(\"/add\"), 10000);\n// Step 3: Isi form dengan data random\nconst listNames = [\"Alex\", \"Budi\", \"Chandra\", \"David\", \"Eka\", \"Fajar\", \"Gilang\", \"Indra\", \"Joko\"];\nconst randomNamePrefix = listNames[Math.floor(Math.random() * listNames.length)];\nconst randomNum = Math.floor(Math.random() * 9000) + 1000;\nconst randomUsername = `${randomNamePrefix}_${randomNum}`;\nconst randomAge = Math.floor(Math.random() * 30) + 18;\nconst addUsernameInput = await driver.wait(\nuntil.elementLocated(By.xpath(\"//input[@placeholder='Username']\")), 10000\n);\nawait addUsernameInput.sendKeys(randomUsername);\nconst ageInput = await driver.findElement(By.xpath(\"//input[@placeholder='Age']\"));\nawait ageInput.sendKeys(randomAge.toString());",
+              "err": {},
+              "uuid": "d42e422d-3665-4e2f-9b4e-591e750eee17",
+              "parentUUID": "31c16593-105f-47b3-9364-5aada83e6eeb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "041da5d8-44d9-4006-9a19-25081f50332a",
+            "d42e422d-3665-4e2f-9b4e-591e750eee17"
+          ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 0,
+          "duration": 2052,
           "root": false,
           "rootEmpty": false,
-          "_timeout": 10000
+          "_timeout": 60000
         }
       ],
       "passes": [],
@@ -136,7 +135,7 @@
   ],
   "meta": {
     "mocha": {
-      "version": "12.0.3"
+      "version": "10.8.2"
     },
     "mochawesome": {
       "options": {
@@ -148,7 +147,7 @@
         "useInlineDiffs": false,
         "code": true
       },
-      "version": "8.1.1"
+      "version": "7.1.4"
     },
     "marge": {
       "options": null,
